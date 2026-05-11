@@ -26,7 +26,7 @@ import {
 
 // Types
 interface Feature {
-  icon: JSX.Element;
+  icon: React.ReactNode;
   title: string;
   description: string;
 }
@@ -55,69 +55,104 @@ export default function App() {
   const [showGuide, setShowGuide] = useState(false);
 
   const ZALO_LINK = "https://zalo.me/0336660253";
+  const LINK_THCS_PRO = "https://chromewebstore.google.com/detail/tr%E1%BB%A3-l%C3%BD-nh%E1%BA%ADp-nh%E1%BA%ADn-x%C3%A9t-thcs/milgnenkokhlecnjcmlkmndcbmmjmcoc";
+  const LINK_VNEDU_PRO = "https://chromewebstore.google.com/detail/tr%E1%BB%A3-l%C3%BD-vnedu-si%C3%AAu-t%E1%BB%91c-pro/momaiedbnbgmlldmhnfnbkjeeihjalip";
+
+  const products = [
+    {
+      id: "csdl",
+      name: "Trợ lý Nhập Nhận xét THCS Pro",
+      tagline: "Chuyên dụng cho hệ thống CSDL Ngành",
+      link: LINK_THCS_PRO,
+      color: "from-[#8B4513] via-[#A52A2A] to-[#DAA520]", // Red-Brown-Yellow tones
+      accent: "#DAA520",
+      features: [
+        "Tự động đọc điểm & điền MÃ + LỜI NHẬN XÉT theo chuẩn",
+        "Hỗ trợ THCS (TT22) & Tiểu học (TT27, NLPC)",
+        "Cá nhân hóa ngân hàng lời nhận xét riêng từng môn",
+        "Chép/dán hàng loạt từ Word/Excel chỉ trong 1 giây",
+        "Bảo mật Local 100% - Dữ liệu chỉ nằm trên máy bạn"
+      ]
+    },
+    {
+      id: "vnedu",
+      name: "Trợ lý Vnedu siêu tốc Pro",
+      tagline: "Tối ưu hóa tuyệt đối cho hệ thống Vnedu",
+      link: LINK_VNEDU_PRO,
+      color: "from-[#0068ff] via-[#00a2ff] to-[#e0f2ff]", // Blue-White tones
+      accent: "#0068ff",
+      features: [
+        "Công nghệ Randomize: Ngẫu nhiên hóa lời phê tự nhiên",
+        "Nhận diện thông minh Điểm số & Đánh giá bằng chữ",
+        "Hỗ trợ đủ cột Giữa kỳ, Cuối kỳ & Cả năm (Học bạ)",
+        "Đầy đủ cho mọi cấp học: TH, THCS, THPT",
+        "Giao diện cài đặt trực quan, thân thiện 100%"
+      ]
+    }
+  ];
 
   const installationSteps = [
-    { title: "Bước 1: Tải bản cài đặt", desc: "Nhấn vào nút bên dưới để nhận link tải file nén (.zip) phiên bản mới nhất qua Zalo.", icon: <Download className="w-5 h-5" /> },
-    { title: "Bước 2: Giải nén file", desc: "Giải nén file vừa tải và lưu vào một thư mục cố định trên máy tính của bạn.", icon: <X className="w-5 h-5 rotate-45" /> },
-    { title: "Bước 3: Bật Developer Mode", desc: "Mở trình duyệt (Chrome/Edge), truy cập theo đường dẫn chrome://extensions/ và bật 'Chế độ nhà phát triển'.", icon: <Zap className="w-5 h-5" /> },
-    { title: "Bước 4: Cài đặt tiện ích", desc: "Chọn 'Tải tiện ích đã giải nén' và tìm đến đúng thư mục bạn đã giải nén ở Bước 2.", icon: <CheckCircle2 className="w-5 h-5" /> },
-    { title: "Bước 5: Kích hoạt Key", desc: "Mở tiện ích vừa cài, nhập mã Key 'xxxxxxx' để kích hoạt bản quyền và bắt đầu sử dụng.", icon: <ShieldCheck className="w-5 h-5" /> },
+    { title: "Bước 1: Chọn phiên bản", desc: "Chọn đúng phiên bản dành cho CSDL ngành hoặc Vnedu phù hợp với hệ thống bạn đang dùng.", icon: <Star className="w-5 h-5" /> },
+    { title: "Bước 2: Cài đặt từ Store", desc: "Nhấn nút cài đặt để chuyển đến Chrome Web Store và nhấn 'Thêm vào Chrome'.", icon: <Chrome className="w-5 h-5" /> },
+    { title: "Bước 3: Đăng nhập & Mở", desc: "Nhấn vào biểu tượng mảnh ghép trên trình duyệt, ghim EduAssist và mở giao diện.", icon: <Zap className="w-5 h-5" /> },
+    { title: "Bước 4: Thiết lập mẫu", desc: "Tùy chỉnh hoặc nạp dữ liệu mẫu nhận xét từ Word/Excel vào hệ thống.", icon: <CheckCircle2 className="w-5 h-5" /> },
+    { title: "Bước 5: Nhập liệu", desc: "Vào trang nhập điểm/nhận xét, nhấn nút hỗ trợ để hệ thống tự động làm việc.", icon: <ShieldCheck className="w-5 h-5" /> },
   ];
 
   const features: Feature[] = [
     {
-      icon: <Zap className="w-6 h-6 text-blue-600" />,
-      title: "Nhập liệu siêu tốc",
-      description: "Tự động điền nhận xét cho hàng loạt học sinh chỉ với vài cú click chuột. Tiết kiệm tới 90% thời gian."
+      icon: <Zap className="w-6 h-6 text-orange-500" />,
+      title: "Tự động hóa 100%",
+      description: "Hệ thống tự động đọc dữ liệu điểm số và khớp lời nhận xét tương ứng một cách chính xác."
+    },
+    {
+      icon: <Star className="w-6 h-6 text-yellow-500" />,
+      title: "Lời phê ngẫu nhiên",
+      description: "Tránh tình trạng trùng lặp lời phê nhờ thuật toán chọn lọc ngẫu nhiên thông minh."
     },
     {
       icon: <ShieldCheck className="w-6 h-6 text-green-600" />,
-      title: "Chính xác tuyệt đối",
-      description: "Giảm thiểu sai sót do nhập liệu thủ công. Hệ thống tự động kiểm tra định dạng và nội dung."
+      title: "An toàn dữ liệu",
+      description: "Dữ liệu được lưu trữ local trên máy tính, không gửi ra ngoài, bảo mật thông tin học sinh tuyệt đối."
     },
     {
-      icon: <Clock className="w-6 h-6 text-purple-600" />,
-      title: "Kho nhận xét phong phú",
-      description: "Tích hợp sẵn hàng ngàn mẫu nhận xét thông minh, phù hợp với mọi khối lớp và thông tư mới nhất."
-    },
-    {
-      icon: <Chrome className="w-6 h-6 text-orange-600" />,
-      title: "Tương thích đa nền tảng",
-      description: "Hỗ trợ hoàn hảo trên các hệ thống CSDL ngành, VNedu và SMAS phổ biến nhất hiện nay."
+      icon: <Download className="w-6 h-6 text-blue-600" />,
+      title: "Nhập liệu từ Excel",
+      description: "Hỗ trợ copy/paste hàng loạt từ Excel/Word vào ngân hàng dữ liệu chỉ trong tích tắc."
     }
   ];
 
   const pricing: PricingPlan[] = [
     {
-      name: "Cơ bản",
+      name: "Gói Dùng Thử",
       price: "Miễn phí",
       features: [
-        "Hỗ trợ CSDL ngành",
+        "Hỗ trợ đầy đủ tính năng chính",
         "Kho mẫu nhận xét mặc định",
-        "Nhập liệu tối đa 50 học sinh/lần",
+        "Giới hạn số lượt nhập liệu",
         "Cập nhật định kỳ"
       ]
     },
     {
-      name: "Chuyên nghiệp",
-      price: "199.000đ/năm",
+      name: "Gói Pro (Cá nhân)",
+      price: "100.000đ/năm",
       recommended: true,
       features: [
-        "Hỗ trợ VNedu, SMAS, CSDL ngành",
-        "Tùy chỉnh kho mẫu cá nhân",
-        "Không giới hạn số lượng học sinh",
-        "Hỗ trợ ưu tiên 24/7",
-        "Đồng bộ hóa dữ liệu đám mây"
+        "Không giới hạn lượt nhập liệu",
+        "Tùy chỉnh kho mẫu cá nhân hóa",
+        "Hỗ trợ ưu tiên qua Zalo 24/7",
+        "Kích hoạt 1 máy tính sử dụng",
+        "Mở khóa công nghệ Randomize"
       ]
     },
     {
-      name: "Trường học",
+      name: "Gói Nhà Trường",
       price: "Liên hệ",
       features: [
-        "Tài khoản cho toàn bộ giáo viên",
-        "Quản lý tập trung kho mẫu của trường",
-        "Tích hợp theo yêu cầu riêng",
-        "Đào tạo và hướng dẫn sử dụng",
+        "Chiết khấu cao cho nhóm giáo viên",
+        "Quản lý tập trung kho mẫu",
+        "Hỗ trợ cài đặt từ xa qua UltraView",
+        "Cập nhật theo yêu cầu riêng",
         "Xuất báo cáo tổng hợp"
       ]
     }
@@ -224,86 +259,116 @@ export default function App() {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+      <section className="pt-32 pb-20 px-4 overflow-hidden">
+        <div className="max-w-7xl mx-auto text-center relative">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-700 border border-blue-100 rounded-full text-xs font-bold mb-6 uppercase tracking-wider">
-              <Zap className="w-3.5 h-3.5" />
-              Tiết kiệm 40h mỗi học kỳ
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 border border-blue-100 rounded-full text-xs font-black mb-8 uppercase tracking-[0.2em]">
+              <Zap className="w-4 h-4 fill-current" />
+              Tiết kiệm 90% thời gian nhập học bạ
             </div>
-            <h1 className="text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.15] mb-6">
-              Nhập nhận xét <span className="text-blue-600">chỉ trong 1 click.</span>
+            <h1 className="text-5xl md:text-7xl font-black text-slate-900 leading-[1.1] mb-8 tracking-tighter">
+              Trợ Lý Nhận Xét <br />
+              <span className="text-blue-600">Thế Hệ Mới Pro</span>
             </h1>
-            <p className="text-lg text-slate-600 mb-8 max-w-xl leading-relaxed">
-              EduAssist là trợ lý đắc lực cho giáo viên trong mỗi kỳ tổng kết. Hỗ trợ nhập liệu thông minh trên VNedu, SMAS và CSDL ngành với độ chính xác tuyệt đối.
+            <p className="text-xl text-slate-500 mb-12 max-w-2xl mx-auto leading-relaxed">
+              Giải pháp tự động hóa 100% dành cho giáo viên Việt Nam. Chuyên biệt hóa cho 2 hệ thống lớn nhất hiện nay.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a 
-                href={ZALO_LINK}
-                target="_blank"
-                rel="noreferrer"
-                className="group px-8 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-all flex items-center justify-center gap-2 shadow-xl shadow-slate-200"
-              >
-                <Download className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
-                Tải về ngay (Miễn phí)
+            
+            <div className="flex flex-wrap justify-center gap-6 mb-20">
+              <a href="#products" className="px-10 py-5 bg-slate-900 text-white font-black rounded-2xl hover:scale-105 transition-all shadow-2xl flex items-center gap-3">
+                Khám phá phiên bản Pro
+                <ArrowRight className="w-5 h-5" />
               </a>
               <button 
                 onClick={() => setShowGuide(true)}
-                className="px-8 py-4 bg-white text-slate-900 font-bold rounded-2xl border border-slate-200 hover:bg-slate-50 transition-all flex items-center justify-center gap-2 shadow-sm"
+                className="px-10 py-5 bg-white text-slate-900 font-bold rounded-2xl border border-slate-200 hover:bg-slate-50 transition-all flex items-center gap-3"
               >
-                Xem hướng dẫn cài đặt
-                <ArrowRight className="w-5 h-5" />
+                Hướng dẫn sử dụng
               </button>
-            </div>
-            <div className="mt-10 flex items-center gap-4 text-sm text-slate-500">
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map(i => (
-                  <img key={i} src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i + 10}`} className="w-8 h-8 rounded-full border-2 border-white bg-slate-100" />
-                ))}
-              </div>
-              <span>Hơn 5.000+ giáo viên đã tin dùng toàn quốc</span>
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative"
-          >
-            <div className="relative bg-white rounded-3xl shadow-2xl p-4 border border-slate-100">
-              <div className="rounded-2xl overflow-hidden bg-slate-50 aspect-video relative group">
-                <img 
-                  src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop" 
-                  alt="EduAssist in action" 
-                  className="w-full h-full object-cover rounded-xl"
-                />
-                <div className="absolute inset-0 bg-blue-900/10 group-hover:bg-blue-900/0 transition-all" />
-              </div>
-              
-              {/* Floating UI element */}
-              <motion.div 
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -right-6 top-1/4 bg-white p-4 rounded-2xl shadow-xl border border-slate-50 max-w-[200px]"
+          {/* Abstract background elements */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-20 pointer-events-none">
+            <div className="absolute top-0 left-0 w-96 h-96 bg-blue-400 rounded-full blur-[120px]" />
+            <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-400 rounded-full blur-[120px]" />
+          </div>
+        </div>
+      </section>
+
+      {/* Product Showcase Section */}
+      <section id="products" className="py-24 px-4 bg-slate-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl font-black text-slate-900 mb-4 tracking-tight">Chọn Phiên Bản Phù Hợp</h2>
+            <p className="text-slate-500 text-lg">Mỗi phiên bản được tối ưu hóa riêng cho từng hệ thống kỹ thuật.</p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-10">
+            {products.map((product, idx) => (
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0, x: idx === 0 ? -30 : 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="group relative"
               >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-2 h-2 rounded-full bg-green-500" />
-                  <span className="text-[10px] uppercase font-bold text-slate-400">Đang hoạt động</span>
+                <div className={`h-full bg-white rounded-[3rem] p-1 shadow-2xl overflow-hidden transition-transform hover:-translate-y-2`}>
+                  <div className={`h-full bg-gradient-to-br ${product.color} rounded-[2.8rem] p-8 md:p-12 text-white relative flex flex-col`}>
+                    
+                    {/* Floating icon */}
+                    <div className="absolute top-10 right-10 opacity-10 scale-[4]">
+                      <Chrome />
+                    </div>
+
+                    <div className="relative z-10 flex-1">
+                      <div className="inline-block px-4 py-1.5 bg-white/20 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-widest mb-6">
+                        Phiên bản {product.id.toUpperCase()}
+                      </div>
+                      <h3 className="text-3xl md:text-4xl font-black mb-4 leading-tight">{product.name}</h3>
+                      <p className="text-white/80 font-medium mb-10 text-lg">{product.tagline}</p>
+
+                      <ul className="space-y-4 mb-12">
+                        {product.features.map((f, i) => (
+                          <li key={i} className="flex gap-4 items-start text-sm leading-relaxed">
+                            <div className="mt-1 p-1 bg-white/20 rounded-lg">
+                              <CheckCircle2 className="w-4 h-4" />
+                            </div>
+                            {f}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="relative z-10 flex flex-col sm:flex-row gap-4 mt-auto">
+                      <a 
+                        href={product.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-8 py-5 bg-white text-slate-900 font-black rounded-2xl hover:bg-slate-50 transition-all text-center shadow-xl flex items-center justify-center gap-3"
+                      >
+                        <Download className="w-5 h-5" />
+                        Tải về ngay
+                      </a>
+                      <a 
+                        href={ZALO_LINK}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-8 py-5 bg-black/20 backdrop-blur-sm text-white font-bold rounded-2xl border border-white/20 hover:bg-white/10 transition-all text-center flex items-center justify-center gap-3"
+                      >
+                        <MessageCircle className="w-5 h-5" />
+                        Nhận hỗ trợ
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                <p className="text-xs font-semibold text-slate-800">Tự động điền 40 học sinh thành công!</p>
               </motion.div>
-            </div>
-            
-            {/* Background decorative elements */}
-            <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-100 rounded-full blur-[100px] opacity-40" />
-          </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
