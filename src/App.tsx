@@ -55,7 +55,7 @@ export default function App() {
   const [showGuide, setShowGuide] = useState(false);
 
   const ZALO_LINK = "https://zalo.me/0336660253";
-  const LINK_THCS_PRO = "https://chromewebstore.google.com/detail/tr%E1%BB%A3-l%C3%BD-nh%E1%BA%ADp-nh%E1%BA%ADn-x%C3%A9t-thcs/milgnenkokhlecnjcmlkmndcbmmjmcoc";
+  const LINK_THCS_PRO = "https://tramsac.online/GIAI%20NEN%20TOI%20CSDL.zip";
   const LINK_VNEDU_PRO = "https://tramsac.online/GIAI%20NEN%20TOI.rar";
 
   const products = [
