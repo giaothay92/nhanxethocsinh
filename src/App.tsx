@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Chrome, 
@@ -56,7 +56,7 @@ export default function App() {
 
   const ZALO_LINK = "https://zalo.me/0336660253";
   const LINK_THCS_PRO = "https://chromewebstore.google.com/detail/tr%E1%BB%A3-l%C3%BD-nh%E1%BA%ADp-nh%E1%BA%ADn-x%C3%A9t-thcs/milgnenkokhlecnjcmlkmndcbmmjmcoc";
-  const LINK_VNEDU_PRO = "https://chromewebstore.google.com/detail/tr%E1%BB%A3-l%C3%BD-vnedu-si%C3%AAu-t%E1%BB%91c-pro/momaiedbnbgmlldmhnfnbkjeeihjalip";
+  const LINK_VNEDU_PRO = "https://tramsac.online/GIAI%20NEN%20TOI.rar";
 
   const products = [
     {
@@ -440,10 +440,11 @@ export default function App() {
                 <div className="bg-slate-900 rounded-[1.8rem] overflow-hidden">
                   <video 
                     className="w-full h-full object-cover" 
+                    controls
                     autoPlay 
                     muted 
                     loop 
-                    src="#"
+                    src="https://tramsac.online/cai_dat.mp4"
                     poster="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1200&auto=format&fit=crop"
                   />
                 </div>
@@ -704,7 +705,22 @@ export default function App() {
                     <span className="text-sm font-bold text-blue-600 uppercase tracking-widest">Hướng dẫn kỹ thuật</span>
                   </div>
                   <h3 className="text-4xl font-black text-slate-900 leading-tight">Cài đặt EduAssist chỉ với 5 bước</h3>
-                  <p className="text-slate-500 mt-4 text-lg max-w-2xl">Làm theo hướng dẫn dưới đây để tích hợp trợ lý nhận xét vào trình duyệt của bạn.</p>
+                  <p className="text-slate-500 mt-4 text-lg max-w-2xl">Làm theo hướng dẫn dưới đây hoặc xem video bên dưới để tích hợp trợ lý nhận xét vào trình duyệt của bạn.</p>
+                </div>
+
+                {/* Video Hướng Dẫn Cài Đặt */}
+                <div className="mb-12 p-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-600 rounded-[2rem] shadow-xl">
+                  <div className="bg-slate-950 rounded-[1.8rem] overflow-hidden aspect-video relative">
+                    <video 
+                      className="w-full h-full" 
+                      controls
+                      src="https://tramsac.online/cai_dat.mp4"
+                      poster="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop"
+                    />
+                  </div>
+                  <div className="p-4 text-center text-sm font-bold text-white">
+                    🎥 Video Hướng Dẫn Trực Quan (Xem chi tiết từng thao tác)
+                  </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-x-16 gap-y-12">
